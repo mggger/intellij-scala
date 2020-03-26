@@ -111,7 +111,7 @@ lazy val scalaImpl: sbt.Project =
       libraryDependencies ++= DependencyGroups.scalaCommunity,
       addCompilerPlugin(Dependencies.macroParadise),
       intellijInternalPlugins := Seq(
-        "platform-langInjection",
+        "IntelliLang",
         "platform-images",
         "java-i18n",
         "android",
@@ -284,14 +284,14 @@ lazy val intelliLangIntegration = newProject(
   scalaImpl % "test->test;compile->compile"
 ).settings(
   addCompilerPlugin(Dependencies.macroParadise),
-  intellijInternalPlugins ++= Seq("platform-langInjection")
+  intellijInternalPlugins ++= Seq("IntelliLang")
 )
 
 lazy val mavenIntegration =
   newProject("maven", file("scala/integration/maven"))
     .dependsOn(scalaImpl % "test->test;compile->compile")
     .settings(
-      intellijInternalPlugins ++= Seq("maven")
+      intellijInternalPlugins ++= Seq("maven", "maven-model")
     )
 
 lazy val propertiesIntegration =
